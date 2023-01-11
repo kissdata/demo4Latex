@@ -1,0 +1,109 @@
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
+
+\title{\LaTeX{} 模板 elegantbook.cls 使用示例}
+\subtitle{示例1 不带封面使用}
+
+\author{kissdata}
+
+\date{2023/1/11}
+% \version{1.0}
+
+\extrainfo{模板作者：Ethan Deng}
+
+\setcounter{tocdepth}{3}
+
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\addbibresource[location=local]{reference.bib} % 参考文献
+
+\begin{document}
+	
+ %	\maketitle % 封面
+
+这是一个教使用 elegantbook 的 库的案例，为什么用它？因为它在 2022 年底 “定型” 了，最终版本 v4.5。你可以在
+ \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{github.com/ElegantLaTeX/ElegantBook} 下载。
+
+下载链接里也有官方的写法教程，本文档演示的东西是：去除封面；去除参考；目录前加一页；章节当作附录的代码框架。
+平时做知识笔记可以拿它来跑。
+
+~\\
+
+在目录前多出这一页的方法其实很容易，就是把文字内容写在 \lstinline|\frontmatter| 前面（笑 $\sim \sim$
+
+
+	\frontmatter  % 目录链接
+	\tableofcontents % 目录
+	\mainmatter % 章节带序号，目录带页码
+
+
+\chapter{文档代码}
+	
+	\section{如何获取本文档源码}
+	
+	代码在 example 目录的文件 test1.tex
+	
+	\begin{remark}
+		还有一个 Makefile 文件。因为用 tex 运行后会产生一堆文件，建议写完后用它清理一下。
+		（不会吧，不会 make clean 在 win 上按了为什么没用还不知道吧 $ \cdots$）
+	\end{remark}
+
+	\section{写法框架}
+	
+	下面的代码复制了就能跑，
+	提醒一下，第一行的 \{elegantbook\} 就是 cls 文件名，你要把它放到 tex 文件同一个文件夹下。
+\begin{lstlisting}
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
+
+% ... % 自定义无关标签
+
+\setcounter{tocdepth}{3}
+	
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+\usepackage{cprotect}
+\addbibresource[location=local]{reference.bib} % 参考文献
+
+\begin{document}
+	
+	balabalabala % 这个例子的重点
+
+	\frontmatter     % 目录链接，不写的话点目录不跳转
+	\tableofcontents % 目录
+	\mainmatter      % 章节带序号，目录带页码
+		
+	\chapter{xxx}   % 第一章，
+		这里开始写正文 balabala $\cdots$
+
+	\chapter{xxx} 
+
+\appendix	% 后面的章节都是附录
+
+	\chapter{yyy}   % 附录A
+
+\end{document}
+
+\end{lstlisting}
+
+
+\chapter{软件开发}
+
+	balabala $ \cdots $
+
+	\section{学什么语言}
+
+	C++, Go
+	
+\appendix  
+
+\chapter{语法说明}
+
+	这里写附录内容，算是废话输出地，一定要记得在这个章节名前面加上 \lstinline|\appendix| 哦！
+	
+\end{document}
